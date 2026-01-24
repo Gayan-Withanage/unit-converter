@@ -69,7 +69,7 @@ function convert() {
     }
 
     document.getElementById("result").innerText =
-        ${value} ${from} = ${result.toFixed(4)} ${to};
+        `${value} ${from} = ${result.toFixed(4)} ${to}`;
 }
 
 function convertTemperature(val, from, to) {
