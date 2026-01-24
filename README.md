@@ -1,9 +1,9 @@
 # Unit Converter Web Application
 
 ## Group Information
-- **Student 1:** Gayan Eranda Withanage – ITXXXXXXXX – Role: DevOps Engineer  
-- **Student 2:** [Student Full Name as in LMS] – ITXXXXXXXX – Role: Frontend Developer  
-- **Student 3:** [Student Full Name as in LMS] – ITXXXXXXXX – Role: JavaScript / Backend Logic Developer  
+- **Student 1:** Gayan Withanage – (ITBNM-2313-0023) – Role: DevOps Engineer  
+- **Student 2:** Isuru Sandaruwan – (ITBNM-2313-0055) – Role: Frontend Developer  
+- **Student 3:** Navodya Heshara – (ITBNM-2313-0032) – Role: JavaScript / Backend Logic Developer  
 
 ---
 
@@ -15,7 +15,7 @@ The project follows modern Git and DevOps practices, including feature branching
 ---
 
 ## Live Deployment
-🔗 **Live URL:** https://unit-converter.vercel.app
+🔗 **Live URL:** https://unit-converter-7xgz.vercel.app/
 
 ---
 
@@ -48,7 +48,7 @@ We implemented the following branching strategy:
 
 ## Individual Contributions
 
-### Gayan Eranda Withanage
+### Gayan Withanage - ITBNM-2313-0023
 - Repository initialization and configuration
 - Branching strategy implementation
 - GitHub Actions CI workflow setup
@@ -57,13 +57,13 @@ We implemented the following branching strategy:
 - Merge conflict creation and resolution
 - Final merge from develop to main
 
-### [Student 2 Name]
+### Isuru Sandaruwan - ITBNM-2313-0055
 - HTML structure and layout design
 - CSS styling and responsive design
 - UI enhancements and usability improvements
 - Feature branch development and pull requests
 
-### [Student 3 Name]
+### Navodya Heshara - ITBNM-2313-0032
 - JavaScript unit conversion logic
 - Input validation and calculation handling
 - Feature enhancements and bug fixes
@@ -90,4 +90,5 @@ npm install
 
 # Run development server
 npm run dev
+
 
