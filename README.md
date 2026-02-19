@@ -1,7 +1,7 @@
 # Unit Converter Web Application
 
 ## Group Information
-- **Student 1:** Gayan Withanage – (ITBNM-2313-0023) – Role: DevOps Engineer  
+- **Student 1:** Gayan Eranda – (ITBNM-2313-0023) – Role: DevOps Engineer  
 - **Student 2:** Isuru Sandaruwan – (ITBNM-2313-0055) – Role: Frontend Developer  
 - **Student 3:** Navodya Heshara – (ITBNM-2313-0032) – Role: JavaScript / Backend Logic Developer  
 
@@ -48,7 +48,7 @@ We implemented the following branching strategy:
 
 ## Individual Contributions
 
-### Gayan Withanage - ITBNM-2313-0023
+### Gayan Eranda - ITBNM-2313-0023
 - Repository initialization and configuration
 - Branching strategy implementation
 - GitHub Actions CI workflow setup
@@ -90,5 +90,6 @@ npm install
 
 # Run development server
 npm run dev
+
 
 
