@@ -1,0 +1,20 @@
+{
+  "name": "unit-converter",
+  "version": "1.0.0",
+  "description": "A modern, multi-category unit converter built using pure HTML, CSS, and JavaScript.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gayan-Withanage/unit-converter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gayan-Withanage/unit-converter/issues"
+  },
+  "homepage": "https://github.com/Gayan-Withanage/unit-converter#readme"
+}
