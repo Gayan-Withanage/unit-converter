@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit Converter Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+<div class="app">
+    <h1>Unit Converter</h1>
+
+    <select id="category" onchange="loadUnits()">
+        <option value="length">Length</option>
+        <option value="mass">Mass</option>
+        <option value="temperature">Temperature</option>
+        <option value="time">Time</option>
+        <option value="speed">Speed</option>
+    </select>
+
+    <input type="number" id="inputValue" placeholder="Enter value">
+
+    <div class="row">
+        <select id="fromUnit"></select>
+        <span>→</span>
+        <select id="toUnit"></select>
+    </div>
+
+    <button onclick="convert()">Convert</button>
+
+    <div class="result" id="result">Result will appear here</div>
+</div>
+
+<script src="script/script.js"></script>
+</body>
+</html>
