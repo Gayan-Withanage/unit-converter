@@ -15,7 +15,7 @@ The project follows modern Git and DevOps practices, including feature branching
 ---
 
 ## Live Deployment
-🔗 **Live URL:** https://unit-converter-kufo.vercel.app/
+🔗 **Live URL:** https://unit-converter-7xgz.vercel.app/
 
 ---
 
@@ -90,8 +90,6 @@ npm install
 
 # Run development server
 npm run dev
-
-
 
 
 
