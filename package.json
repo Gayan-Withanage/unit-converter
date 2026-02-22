@@ -1,0 +1,9 @@
+{
+  "name": "unit-converter",
+  "version": "1.0.0",
+  "description": "Unit Converter Application",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "echo 'Ready to deploy'"
+  }
+}
