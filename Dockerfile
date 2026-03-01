@@ -8,9 +8,8 @@ FROM nginx:alpine
 # Remove default nginx files
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy your custom nginx configuration (if you have one)
-# Otherwise nginx will use default config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Optional: copy custom nginx configuration (if you have one)
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy all your static files (HTML, CSS, JS, images) into nginx
 COPY . /usr/share/nginx/html
