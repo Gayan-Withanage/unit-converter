@@ -1,0 +1,115 @@
+# =============================================================================
+# docker-compose.yml - Service Orchestration
+# Unit Converter Web Application
+# =============================================================================
+# This file defines the complete application stack and allows the entire
+# application to be started with a single command: docker compose up
+#
+# Architecture: Single-service (web only)
+# Justification: The Unit Converter is a pure static web application with
+# no backend server, database, or message queue. A single containerised
+# nginx service is sufficient to serve all application functionality.
+# Adding additional services would introduce unnecessary complexity without
+# architectural benefit.
+# =============================================================================
+
+version: '3.8'
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # web: The main (and only) application service.
+  # Serves the static HTML/CSS/JS files via nginx inside an Alpine container.
+  # ---------------------------------------------------------------------------
+  web:
+    # Build the image from the Dockerfile in the current directory.
+    # The context (.) tells Docker Compose where to find the build files.
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # Name the resulting image for easy identification.
+    image: unit-converter:latest
+
+    # Name the running container for easy reference in logs and exec commands.
+    container_name: unit-converter-app
+
+    # Restart policy: automatically restart the container if it stops
+    # unexpectedly. 'unless-stopped' means it restarts on crashes but not
+    # when manually stopped with 'docker compose stop'.
+    restart: unless-stopped
+
+    # Port mapping: maps host port (configurable via .env) to container port 80.
+    # The HOST_PORT variable defaults to 8080 if not set in the environment.
+    # Using a variable allows this to be changed without editing this file,
+    # which supports deployment to different environments (dev, staging, prod).
+    ports:
+      - "${HOST_PORT:-8080}:80"
+
+    # Connect this service to the custom bridge network defined below.
+    # Using a named network (rather than the default bridge) provides better
+    # isolation and allows services to be referenced by name in future if
+    # additional services (e.g. a backend API) are added.
+    networks:
+      - unit-converter-network
+
+    # Environment variables passed into the container at runtime.
+    # These allow environment-specific configuration without modifying the image.
+    # Values can be overridden by creating a .env file in the project root.
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - APP_VERSION=${APP_VERSION:-1.0.0}
+
+    # Resource limits: restrict the container to a defined amount of CPU and RAM.
+    # This prevents a single misbehaving container from consuming all host
+    # resources, which is critical in shared or production environments.
+    # Values are appropriate for a lightweight static file server.
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'       # Maximum 50% of one CPU core
+          memory: 128M       # Maximum 128 MB of RAM
+        reservations:
+          cpus: '0.10'       # Guaranteed minimum 10% of one CPU core
+          memory: 32M        # Guaranteed minimum 32 MB of RAM
+
+    # Health check: periodically verifies the container is responding correctly.
+    # If the check fails 3 times in a row, Docker marks the container unhealthy.
+    # This enables automated recovery and readiness detection in orchestrators.
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s      # How often to run the check
+      timeout: 10s       # How long to wait for a response
+      retries: 3         # How many failures before marking as unhealthy
+      start_period: 5s   # Grace period after container starts
+
+    # Logging configuration: limits log file size to prevent disk exhaustion.
+    # Rotates logs after 10 MB, keeping a maximum of 3 rotated files.
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    # Mount a read-only volume for the nginx configuration file.
+    # Using a volume (rather than rebuilding the image) allows the nginx
+    # configuration to be updated without a full image rebuild.
+    # Read-only mount improves security by preventing the container from
+    # modifying its own configuration.
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+
+# =============================================================================
+# Networks
+# =============================================================================
+# A custom bridge network is defined to:
+#   1. Provide clear network isolation from other Docker applications.
+#   2. Enable DNS-based service discovery by container name (useful if
+#      additional services such as an API backend are added in the future).
+#   3. Follow best practices for production Docker Compose configurations.
+# =============================================================================
+networks:
+  unit-converter-network:
+    driver: bridge
+    name: unit-converter-net
