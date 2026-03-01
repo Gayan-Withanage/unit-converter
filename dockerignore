@@ -1,0 +1,102 @@
+# =============================================================================
+# .dockerignore - Docker Build Context Exclusions
+# Unit Converter Web Application
+# =============================================================================
+# This file tells Docker which files and directories to EXCLUDE from the
+# build context when building the image.
+#
+# Why this matters:
+#   1. PERFORMANCE: A smaller build context means faster uploads to the Docker
+#      daemon, which speeds up every build — especially important in CI/CD.
+#   2. SECURITY: Prevents sensitive files (e.g. .env, secrets) from being
+#      accidentally copied into the image where they could be extracted.
+#   3. IMAGE SIZE: Avoids bloating the image with files that serve no runtime
+#      purpose (e.g. test files, documentation, local editor configs).
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Version Control
+# The .git directory is large and serves no purpose inside the container.
+# Including it would expose commit history and potentially sensitive data.
+# -----------------------------------------------------------------------------
+.git
+.gitignore
+.github
+
+# -----------------------------------------------------------------------------
+# Node.js Dependencies
+# node_modules can be hundreds of MB. They are re-installed inside the
+# container during the build stage, so there is no need to copy them in.
+# Excluding this directory is one of the most impactful .dockerignore entries.
+# -----------------------------------------------------------------------------
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -----------------------------------------------------------------------------
+# Environment & Secrets
+# These files may contain sensitive credentials, API keys, or local overrides.
+# They must NEVER be included in a Docker image.
+# Environment-specific values should be passed at runtime via docker-compose
+# or orchestration platform secrets management.
+# -----------------------------------------------------------------------------
+.env
+.env.*
+*.pem
+*.key
+*.cert
+secrets/
+
+# -----------------------------------------------------------------------------
+# Docker Files (no need to nest Docker config inside the image itself)
+# -----------------------------------------------------------------------------
+Dockerfile
+Dockerfile.*
+docker-compose.yml
+docker-compose.*.yml
+.dockerignore
+
+# -----------------------------------------------------------------------------
+# Documentation and Non-Runtime Files
+# These files are useful for developers but serve no purpose at runtime.
+# -----------------------------------------------------------------------------
+README.md
+CHANGELOG.md
+LICENSE
+docs/
+*.md
+
+# -----------------------------------------------------------------------------
+# Test Files
+# Test code should never be included in a production image.
+# Tests increase image size without providing runtime value.
+# -----------------------------------------------------------------------------
+**/*.test.js
+**/*.spec.js
+__tests__/
+test/
+tests/
+coverage/
+
+# -----------------------------------------------------------------------------
+# Build & CI Tooling
+# Local build artefacts and CI configuration are not needed in the image.
+# -----------------------------------------------------------------------------
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# -----------------------------------------------------------------------------
+# Editor & OS Files
+# These are local development artefacts with no runtime purpose.
+# Including them could expose editor preferences or system metadata.
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
